@@ -1,4 +1,4 @@
-AFSC: Adaptive Fourier Space Compression for Anomaly Detection
+# AFSC: Adaptive Fourier Space Compression for Anomaly Detection
 
 We propose two modules, namely the Dilated Convolution with Dense Connection module (DCDCm) and the Adaptive Fourier Space Compression module (AFSCm), for reconstruction-based anomaly detection methods. These modules can be combined with the majority of current reconstruction-based anomaly detection methods.
 
