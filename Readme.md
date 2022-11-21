@@ -4,4 +4,4 @@ We propose two modules, namely the Dilated Convolution with Dense Connection mod
 
 We provide implementation for PyTorch in the AFSC-main.py script.
 
-![fig2](.\imgs\fig2.png)
+![fig2](./imgs/fig2.png)
