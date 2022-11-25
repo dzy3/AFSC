@@ -47,25 +47,30 @@ class denseBlockLayer(nn.Module):
 
 
 class denseBlock(nn.Module):
-    def __init__(self, in_channels, out_channels, layer, kernelSize=3, growthRate=16, inceptionLayer=False,
-                 dilationLayer=True, activ='ReLU'):
+    def __init__(self, in_channels, out_channels, layer, layer_sub, kernelSize=3, growthRate=16, inceptionLayer=False,
+                 dilationLayer=False, activ='ReLU'):
         super(denseBlock, self).__init__()
         dilate = 1
         if (dilationLayer):
             dilateMulti = 2
         else:
             dilateMulti = 1
+        pad = int((kernelSize - 1) / 2)
         self.layer = layer
         templayerList = []
         for i in range(0, layer):
-            tempLayer = denseBlockLayer(in_channels + growthRate * i, growthRate, kernelSize, inceptionLayer, dilate,
-                                        activ)
-            dilate = dilate * dilateMulti
-            templayerList.append(tempLayer)
-            print(dilate)
+            if i<layer_sub:
+                tempLayer = denseBlockLayer(in_channels + growthRate * i, growthRate, kernelSize, inceptionLayer, dilate,
+                                            activ)
+                dilate = dilate * dilateMulti
+                templayerList.append(tempLayer)
+            if i>=layer_sub:
+                tempLayer = denseBlockLayer(in_channels + growthRate * i, growthRate, kernelSize, inceptionLayer, 1,
+                                            activ)
+                templayerList.append(tempLayer)
+
         self.layerList = nn.ModuleList(templayerList)
-        self.outputLayer = denseBlockLayer(in_channels + growthRate * layer, out_channels, kernelSize, inceptionLayer,
-                                           1,
+        self.outputLayer = denseBlockLayer(in_channels + growthRate * layer, out_channels, kernelSize, inceptionLayer, 1,
                                            activ)
         self.bn = nn.BatchNorm2d(out_channels)
 
