@@ -47,7 +47,7 @@ class denseBlockLayer(nn.Module):
 
 
 class denseBlock(nn.Module):
-    def __init__(self, in_channels, out_channels, kernelSize=3, growthRate=16, layer=3, inceptionLayer=False,
+    def __init__(self, in_channels, out_channels, layer, kernelSize=3, growthRate=16, inceptionLayer=False,
                  dilationLayer=True, activ='ReLU'):
         super(denseBlock, self).__init__()
         dilate = 1
